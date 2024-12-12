@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#3e454c">
+
+    <title></title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet Control Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
+    <style>
+        #map {
+            height: 400px;
+        }
+
+        #imgBox {
+            width: 300px;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #imgBox img {
+            width: 200px;
+            /* Adjust the size of the QR code */
+            height: 200px;
+            /* Adjust the size of the QR code */
+        }
+
+        #imgBox.show-img img {
+            display: block;
+            /* Ensure the QR code is visible */
+            margin: 0 auto;
+            /* Center the QR code */
+        }
+
+        .error {
+            border: 1px solid red;
+            /* Highlight input field if there's an error */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="brand clearfix">
+        <a href="/admin/dashboard" style="font-size: 20px; padding-top:1%; color:#fff"> </a>
+        <span class="menu-btn"><i class="fa fa-bars"></i></span>
+        <ul class="ts-profile-nav">
+            <li class="ts-account">
+                <a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i
+                        class="fa fa-angle-down hidden-side"></i></a>
+                <ul>
+                    <!-- <li><a href="/admin/profile">Profile</a></li>
+                    <li><a href="/admin/changepassword">Change Password</a></li> -->
+                    <li><a href="/admin/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ts-main-content">
+        <nav class="ts-sidebar">
+            <ul class="ts-sidebar-menu">
+                <li class="ts-label">Main</li>
+                <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li>
+                    <a href="#"><i class="fa fa-files-o"></i>events management</a>
+                    <ul>
+                        <li><a href="/admin/addevent">Add event</a></li>
+                        <li><a href="/admin/eventlist">event list</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-files-o"></i> Donors</a>
+                    <ul>
+                        <li><a href="/admin/adddonor">Add Donor</a></li>
+                        <li><a href="/admin/donorlist">Donors List</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-files-o"></i>image</a>
+                    <ul>
+                        <li><a href="/admin/addimage">Add image</a></li>
+                        <li><a href="/admin/imagelist">image List</a></li>
+                    </ul>
+                </li>
+                <li><a href="/admin/bloodrequests"><i class="fa fa-users"></i> Blood Requests</a></li>
+                
+            </ul>
+        </nav>
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="page-title">ADD EVENT </h2>
+                        <div class="row">
+                            <div class="col-md-10 my-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"></div>
+                                    <div class="panel-body">
+                                        <form id="Register-form" action="/admin/addevent" method="post">
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="name">EVENT IMAGE</label>
+                                                    <input name="image" id="image" type="file"
+                                                        class="form-control shadow-none" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="name">EVENT NAME</label>
+                                                    <input name="name" id="name" type="text"
+                                                        class="form-control shadow-none" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="name">EVENT CITY</label>
+                                                    <input name="city" id="city" type="text"
+                                                        class="form-control shadow-none" required>
+                                                </div> 
+                                                <div class="mb-3">
+                                                    <label class="form-label">EVENT DESCRIPTION</label>
+                                                    <textarea name="description" id="description"
+                                                        class="form-control shadow-none" rows="5"></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">GENERATE QRCODE</label>
+                                                    <input name="" id="qrText" type="text"
+                                                        class="form-control shadow-none">
+                                                    <div id="imgBox">
+                                                        <img id="qrImage" src="" alt="">
+                                                    </div>
+                                                    <button onclick="generateQR()">Generate QR</button>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="age">EVENT DATE</label>
+                                                    <input name="date" type="date" class="form-control shadow-none"
+                                                        required>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="event-time">Event
+                                                                Time</label>
+                                                            <input name="timeFrom" id="event-time" type="time"
+                                                                class="form-control shadow-none" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="event-time-to">Event
+                                                                Time To</label>
+                                                            <input name="timeTo" id="event-time-to" type="time"
+                                                                class="form-control shadow-none" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="name">QRCODE IMAGE</label>
+                                                    <input name="qrimage" id="qrimage" type="file"
+                                                        class="form-control shadow-none" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">ADD EVENT</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let imgBox = document.getElementById("imgBox");
+        let qrImage = document.getElementById("qrImage");
+        let qrText = document.getElementById("qrText");
+
+        function generateQR() {
+            if (qrText.value.length > 0) {
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(qrText.value); // Increased size of the QR code
+                imgBox.classList.add("show-img");
+            } else {
+                qrText.classList.add("error");
+                setTimeout(() => {
+                    qrText.classList.remove('error');
+                }, 1000);
+            }
+        }
+        // CKEDITOR.replace('description');
+    </script>
+    <script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Situated in the heart of the Deharadun city, Shagun Hotel offers a perfect blend of modern luxury and timeless elegance. Boasting meticulously designed rooms and top-notch amenities, we ensure a comfortable and memorable stay for our guests. Our dedicated staff is committed to providing impeccable service, ensuring a seamless and enjoyable experience. With convenient access to local attractions and a culinary journey of exquisite flavors at our on-site restaurant, Shagun Hotel promises a delightful retreat for both business and leisure travelers. Experience unparalleled hospitality in a sophisticated ambiance that defines our commitment to creating lasting memories ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="/index">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <!-- Your custom styles -->
+    <style>
+        /* Basic Reset */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        /* Header Styles */
+        th {
+            background-color: #f2f2f2;
+            padding: 12px;
+            text-align: left;
+        }
+
+        /* Alternating Row Colors */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Cell Styles */
+        td {
+            padding: 8px;
+        }
+
+        /* Hover Effect */
+        tr:hover {
+            background-color: #e5e5e5;
+        }
+    </style>
+    <style>
+        /* Add this CSS to your existing styles */
+
+/* Navbar */
+.navbar {
+    padding: 15px 10px;
+}
+
+/* Logo */
+.navbar-brand h1 {
+    font-size: 24px;
+}
+
+/* Menu Items */
+.navbar-nav .nav-link {
+    padding: 10px;
+}
+
+/* Modals */
+.modal-content {
+    max-width: 100%;
+}
+
+/* Registration Modal */
+.modal-dialog {
+    margin: 10px;
+}
+
+/* Footer */
+footer {
+    padding: 10px;
+}
+
+/* Room section */
+.our-room h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Table */
+table {
+    font-size: 14px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 576px) {
+    /* Navbar */
+    .navbar-brand h1 {
+        font-size: 20px;
+    }
+    .navbar-nav .nav-link {
+        padding: 5px;
+    }
+
+    /* Room section */
+    .our-room h2 {
+        font-size: 20px;
+    }
+
+    /* Table */
+    table {
+        font-size: 12px;
+    }
+}
+
+/* Additional Media Queries for other screen sizes if needed */
+
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-lg-5 py-lg-3 sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand me-8 fw-bold" href="/">
+                <h1 class="custome">
+                    <img src="/blood/logonew3.png" alt="Shagun Hotel Logo">
+                </h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active me-4" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4" href="/donor">Donors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4" href="/events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4" href="/gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4" href="/Contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4" href="/bloodrequest">Blood</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex" role="search">
+                <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#RegisterModel">
+                    Register
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- Register Modal -->
+     <div class="modal fade" id="RegisterModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="Register-form" action="/" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="bi bi-person-fill-add fs-3 me-2"></i>User Registration
+                        </h5>
+                        <button type="reset" class="btn-close shadow-non" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                         <!-- Add your registration form fields here  -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input name="name" type="text" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">BLOOD GROUP</label>
+                            <select id="group" name="group">
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select> 
+                        </div>
+    
+                        <div class="mb-3">
+                            <label class="form-label">MOBILE NO.</label>
+                            <input name="number" type="number" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> ADDRESS</label>
+                            <input name="name" type="name" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> CITY</label>
+                            <input name="name" type="name" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> PINCODE</label>
+                            <input name="name" type="name" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> STATE</label>
+                            <input name="name" type="name" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> PASSWORD</label>
+                            <input name="password" type="password" class="form-control shadow-none" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+     
+    <!-- login Modal -->
+    
+
+    <section class="our-room">
+        <div class="container">
+            <div class="row">
+                <h2 class="fw-bold h-font text-center" style="margin-top: 27px;color:rgb(239, 61, 52);"><U> DONOR</U></h2>
+            </div>
+        </div>
+    </section>
+
+    
+    <table id="example" class="display">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>BLOOD GROUP</th>
+                <th>MOBILE NO.</th>
+                <th>ADDRESS</th>
+                <th>CITY</th>
+                <th>STATE</th>
+                <th>CONTACT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% x.forEach((y) => { %>
+                <tr>
+                    <td><%= y.name %></td>
+                    <td><%= y.group %></td>
+                    <td><%= y.number %></td>
+                    <td><%= y.address %></td>
+                    <td><%= y.city %></td>
+                    <td><%= y.state %></td>
+                    <td>
+                        <!-- Add buttons for contact actions -->
+                        <a href="tel:<%= encodeURIComponent(y.number) %>">
+                            <button class="btn btn-danger">CALL</button>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?phone=<%= encodeURIComponent(y.number) %>" target="_blank">
+                            <button class="btn btn-success">WhatsApp</button>
+                        </a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <footer class="footer" style="background-color: #17202A;">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Us Section -->
+                <section class="col-md-6 contact-section">
+                    <img src="/blood/logo2footer.png" alt="Blood Donation Logo" class="logo">
+                    <div class="contact">
+                        <h4 style="color: rgb(239, 61, 52);">Contact Us</h4>
+                        <div class="contactus" style="color: aliceblue;">
+                            <p style="color: aliceblue;">Email: info@blooddonation.com</p>
+                            <p style="color: aliceblue;">Phone: 123-456-7890</p>
+                        </div>
+                    </div>
+                </section>
+    
+                <!-- Quick Links Section -->
+                <section class="col-md-3 quick-links-section">
+                    <h4 style="color: rgb(239, 61, 52);">Quick Links</h4>
+                    <ul style="color: aliceblue;">
+                    <li><a href="/events" style="color: white;text-decoration: none;">Events</a></li>
+                    <li><a href="/donors" style="color: white;text-decoration: none;">donor</a></li>
+                    <li><a href="/gallery" style="color: white;text-decoration: none;">Gallery</a></li>
+                    <li><a href="/contact" style="color: white;text-decoration: none;">Contact</a></li>
+                   </ul>
+                </section>
+    
+                <!-- Follow Us Section -->
+                <section class="col-md-3 follow-us-section">
+                    <h4 style="color: rgb(239, 61, 52);">Follow Us</h4>
+                    <ul class="social-icons">
+                        <li><a href=""><img src="/blood/instagram (1) (1).svg" style="height: 40px;width: 40px;"></a></li>
+                        <li><a href=""><img src="/blood/twitter.png" style="height: 40px;width: 40px;"></a></li>
+                        <li><a href=""><img src="/blood/facebook (1).svg" style="height: 40px;width: 40px;"></a></li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </footer>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                searching: true // Enable searching
+            });
+        });
+    </script>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+
+    <!-- footer -->
+   
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>
